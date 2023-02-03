@@ -14,6 +14,7 @@ public class MainActivity2 extends AppCompatActivity {
             "Level 6","Level 7","Level 8","Level 9","Level 10"};
 //    TextView level_title;
     RecyclerView recyclerView;
+
     RecyclerAdapter recyclerAdapter;
 
 
@@ -34,6 +35,8 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity2.this,MainActivity3.class);
+                intent.putExtra("level",level);
+
                 startActivity(intent);
             }
         });
