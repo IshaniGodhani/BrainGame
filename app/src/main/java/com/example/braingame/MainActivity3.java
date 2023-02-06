@@ -14,7 +14,7 @@ public class MainActivity3 extends AppCompatActivity {
     ImageView imageView;
     RecyclerView recyclerView;
     String[] level;
-    int[] img={R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,R.drawable.pm,
+    int[] img={R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,
             R.drawable.caracol,R.drawable.galleta,R.drawable.gato,R.drawable.hamburguesa,
             R.drawable.margarita,R.drawable.paraguas,R.drawable.rosa,R.drawable.uvas};
     ImageAdapter imageAdapter;
@@ -22,26 +22,12 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        imageView=findViewById(R.id.grid_img);
 
-        level=getIntent().getStringArrayExtra("level",level);
 
         imageAdapter =new ImageAdapter(this,img);
         recyclerView=findViewById(R.id.re_img);
-        int num_of_cols=4;
-//        gridLayoutManager.setOrientation(recyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,num_of_cols));
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity3.this,4);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(imageAdapter);
-
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-
-
-
-
     }
 }
