@@ -1,5 +1,6 @@
 package com.example.braingame;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -28,13 +29,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.view_h
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.view_holder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerAdapter.view_holder holder, @SuppressLint("RecyclerView") int position) {
         holder.level_title.setText(""+level[position]);
 
         holder.level_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(activity,MainActivity3.class);
+                intent.putExtra("level",level[position]);
                 activity.startActivity(intent);
             }
         });
