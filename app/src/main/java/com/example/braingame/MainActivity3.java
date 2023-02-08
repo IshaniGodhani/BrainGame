@@ -5,64 +5,71 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class MainActivity3 extends AppCompatActivity {
-    ImageView imageView;
     RecyclerView recyclerView;
-    String[] level;
-    int levelNo;
-    int imgs[]={R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,
-            R.drawable.caracol,R.drawable.galleta,R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,
-            R.drawable.caracol,R.drawable.galleta};
-//    int img[]={R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,
-//            R.drawable.caracol,R.drawable.galleta,R.drawable.uvas,R.drawable.rosa,R.drawable.paraguas,
-//            R.drawable.gato,R.drawable.margarita,R.drawable.ardilla,R.drawable.bellota,R.drawable.bombon,R.drawable.coco,
-//            R.drawable.caracol,R.drawable.galleta,R.drawable.uvas,R.drawable.rosa,R.drawable.paraguas,
-//            R.drawable.gato,R.drawable.margarita,};
-    ArrayList<Integer> imgList;
+    int numOfImage, column,levelNo,row;
+    ArrayList<String> imgList=new ArrayList<>();
+    List<String> arrayList;
     ImageAdapter imageAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        imgList = new ArrayList<Integer>();
-        for (int index = 0; index <imgs.length; index++)
-        {
-            imgList.add(imgs[index]);
-        }
-        Collections.shuffle(imgList);
-
-
-        imageAdapter =new ImageAdapter(this,imgList);
         recyclerView=findViewById(R.id.re_img);
         levelNo=getIntent().getIntExtra("level",0);
-        if(levelNo<=3)
+
+
+        if(levelNo>0 && levelNo<=3)
         {
-
-            GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity3.this,4);
-            recyclerView.setLayoutManager(gridLayoutManager);
-            recyclerView.setAdapter(imageAdapter);
+            numOfImage=6;
+            column=3;
+            System.out.println("1-No of images="+numOfImage+"\t"+"num of Columns="+column);
         }
-        else if(levelNo==4 && levelNo==5 && levelNo==6 && levelNo==7)
+        else if(levelNo>3 && levelNo<=7)
         {
-            GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity3.this,5);
-            recyclerView.setLayoutManager(gridLayoutManager);
-            recyclerView.setAdapter(imageAdapter);
+            numOfImage=8;
+            column=4;
+            System.out.println("2-No of images="+numOfImage+"\t"+"num of Columns="+column);
         }
-        else {
-            GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity3.this,6);
-            recyclerView.setLayoutManager(gridLayoutManager);
-            recyclerView.setAdapter(imageAdapter);
+        else if(levelNo>7)
+        {
+            numOfImage=10;
+            column=5;
+            row = 5;
+            System.out.println("3-No of images="+numOfImage+"\t"+"num of Columns="+column);
+        }
+        String[] images = new String[0];
+        try
+        {
+            images = getAssets().list("");
+            imgList = new ArrayList<String>(Arrays.asList(images));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
 
+        arrayList= imgList.subList(0, numOfImage);
+        arrayList.addAll(arrayList);
 
+        Collections.shuffle(arrayList);
+        imageAdapter =new ImageAdapter(this, arrayList);
+
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity3.this,column);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(imageAdapter);
 
     }
 }

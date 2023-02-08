@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.view_h
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(activity,MainActivity3.class);
-                intent.putExtra("level",level[position]);
+                intent.putExtra("level",holder.getAdapterPosition()+1);
                 activity.startActivity(intent);
             }
         });
