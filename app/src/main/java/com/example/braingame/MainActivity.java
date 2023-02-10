@@ -15,12 +15,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nolimit=findViewById(R.id.nolimit);
+        noraml=findViewById(R.id.normal);
 
         nolimit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("label","nolimit");
                 startActivity(intent);
+                finish();
+            }
+        });
+        noraml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("label","normal");
+                startActivity(intent);
+                finish();
+
             }
         });
     }

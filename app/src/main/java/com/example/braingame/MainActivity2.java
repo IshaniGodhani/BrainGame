@@ -12,9 +12,7 @@ import android.widget.TextView;
 public class MainActivity2 extends AppCompatActivity {
     String[] level={"Level 1","Level 2","Level 3","Level 4","Level 5",
             "Level 6","Level 7","Level 8","Level 9","Level 10"};
-//    TextView level_title;
     RecyclerView recyclerView;
-
     RecyclerAdapter recyclerAdapter;
 
 
@@ -22,14 +20,35 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-//        level_title=findViewById(R.id.level);
 
-        recyclerAdapter=new RecyclerAdapter(this,level);
-        recyclerView=findViewById(R.id.level_list);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(MainActivity2.this);
-        linearLayoutManager.setOrientation(recyclerView.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(recyclerAdapter);
+        String str=getIntent().getStringExtra("label");
+        if(str.equals("nolimit"))
+        {
+            recyclerAdapter = new RecyclerAdapter(this, level);
+            recyclerView = findViewById(R.id.level_list);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity2.this);
+            linearLayoutManager.setOrientation(recyclerView.VERTICAL);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(recyclerAdapter);
+        }
+         else if(str.equals("normal"))
+        {
+            recyclerAdapter = new RecyclerAdapter(this, level);
+            recyclerView = findViewById(R.id.level_list);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity2.this);
+            linearLayoutManager.setOrientation(recyclerView.VERTICAL);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(recyclerAdapter);
+        }
+        else
+        {
+            recyclerAdapter = new RecyclerAdapter(this, level);
+            recyclerView = findViewById(R.id.level_list);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity2.this);
+            linearLayoutManager.setOrientation(recyclerView.VERTICAL);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.setAdapter(recyclerAdapter);
+        }
 
 
 
